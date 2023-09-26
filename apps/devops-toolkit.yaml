@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: devops-toolkit-staging
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: helm
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: GitRepository
+        name: devops-toolkit
+  interval: 30s
+  targetNamespace: staging
+  values:
+    image:
+      tag: 2.9.9
+    ingress:
+      host: staging.devops-toolkit.https://8B07AE100E7C594B44AB29645F5B671B.gr7.us-east-1.eks.amazonaws.com.nip.io
